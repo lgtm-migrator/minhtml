@@ -1,52 +1,45 @@
 {
-  "name": "html-minifier-terser",
-  "description": "Highly configurable, well-tested, JavaScript-based HTML minifier.",
-  "version": "5.1.1",
+  "name": "minhtml",
+  "description": "Highly configurable, JavaScript-based HTML minifier.",
+  "version": "0.0.1",
   "keywords": [
     "cli",
     "compress",
     "compressor",
-    "css",
     "html",
     "htmlmin",
-    "javascript",
     "min",
     "minification",
     "minifier",
     "minify",
     "optimize",
     "optimizer",
-    "pack",
     "packer",
-    "parse",
-    "parser",
     "terser",
     "uglifier",
     "uglify"
   ],
-  "homepage": "https://terser.org/html-minifier-terser/",
-  "author": "Daniel Ruf",
-  "maintainers": [
+  "homepage": "https://github.com/R4356th/minhtml",
+  "author": "R4356th",
+  "contributors": [
+    "Gilmore Davidson (https://github.com/gilmoreorless)",
+    "Hugo Wetterberg <hugo@wetterberg.nu>",
+    "Zoltan Frombach <tssajo@gmail.com>",
     "Daniel Ruf <daniel@daniel-ruf.de",
     "Alex Lam <alexlamsl@gmail.com>",
     "Juriy Zaytsev <kangax@gmail.com> (http://perfectionkills.com/)"
   ],
-  "contributors": [
-    "Gilmore Davidson (https://github.com/gilmoreorless)",
-    "Hugo Wetterberg <hugo@wetterberg.nu>",
-    "Zoltan Frombach <tssajo@gmail.com>"
-  ],
-  "license": "MIT",
+  "license": "GPL-v3.0-or-later",
   "bin": {
-    "html-minifier-terser": "./cli.js"
+    "minhtml": "./cli.js"
   },
   "main": "src/htmlminifier.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/terser/html-minifier-terser.git"
+    "url": "git+https://github.com/R4356th/minhtml.git"
   },
   "bugs": {
-    "url": "https://github.com/terser/html-minifier-terser/issues"
+    "url": "https://github.com/R4356th/minhtml/issues"
   },
   "engines": {
     "node": ">=6"
