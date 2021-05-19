@@ -42,7 +42,7 @@
     "url": "https://github.com/R4356th/minhtml/issues"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "scripts": {
     "dist": "grunt dist",
