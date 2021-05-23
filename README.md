@@ -153,6 +153,6 @@ result; // '<p title=blah id=moo>foo</p>'
 
 Benchmarks for minified HTML:
 
-```shell
+```Bash
 node benchmark.js
 ```
