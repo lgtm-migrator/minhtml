@@ -1,17 +1,13 @@
-# HTMLMinifier
+# minhtml - a Node.JS package for easily minifying HTML
 
 [![NPM version](https://img.shields.io/npm/minhtml.svg)](https://www.npmjs.com/package/minhtml)
 [![Build Status](https://github.com/R4356th/minhtml/workflows/CI/badge.svg)](https://github.com/R4356th/minhtml/actions?workflow=CI)
 
-[HTMLMinifier](https://terser.org/html-minifier-terser/) is a highly **configurable**, **well-tested**, JavaScript-based HTML minifier.
+[minhtml](https://r4356th.github.io/minhtml) is a highly **configurable**, **well-tested**, **JavaScript-based** HTML minifier.
 
-See [corresponding blog post](http://perfectionkills.com/experimenting-with-html-minifier/) for all the gory details of [how it works](http://perfectionkills.com/experimenting-with-html-minifier/#how_it_works), [description of each option](http://perfectionkills.com/experimenting-with-html-minifier/#options), [testing results](http://perfectionkills.com/experimenting-with-html-minifier/#field_testing) and [conclusions](http://perfectionkills.com/experimenting-with-html-minifier/#cost_and_benefits).
+See [corresponding blog post by the original author](http://perfectionkills.com/experimenting-with-html-minifier/) for all the gory details of [how it works](http://perfectionkills.com/experimenting-with-html-minifier/#how_it_works), [description of each option](http://perfectionkills.com/experimenting-with-html-minifier/#options), [testing results](http://perfectionkills.com/experimenting-with-html-minifier/#field_testing) and [conclusions](http://perfectionkills.com/experimenting-with-html-minifier/#cost_and_benefits).
 
-[Test suite is available online](https://terser.org/html-minifier-terser/tests/).
-
-Also see corresponding [Ruby wrapper](https://github.com/stereobooster/html_minifier), and for Node.js, [Grunt plugin](https://github.com/gruntjs/grunt-contrib-htmlmin), [Gulp module](https://github.com/jonschlinkert/gulp-htmlmin), [Koa middleware wrapper](https://github.com/koajs/html-minifier) and [Express middleware wrapper](https://github.com/melonmanchan/express-minify-html).
-
-For lint-like capabilities take a look at [HTMLLint](https://github.com/kangax/html-lint).
+[Test suite is available online](https://r4356th.github.io/minhtml/tests/).
 
 ## Minification comparison
 
