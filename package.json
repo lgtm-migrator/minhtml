@@ -1,6 +1,6 @@
 {
   "name": "minhtml",
-  "description": "Highly configurable, JavaScript-based HTML minifier.",
+  "description": "Highly configurable, well-tested JavaScript-based HTML minifier.",
   "version": "0.0.1",
   "keywords": [
     "cli",
