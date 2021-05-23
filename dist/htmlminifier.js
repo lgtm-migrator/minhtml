@@ -1,7 +1,7 @@
 /*!
- * HTMLMinifier v5.1.1 (https://terser.org/html-minifier-terser/)
- * Copyright 2010-2020 Daniel Ruf
- * Licensed under the MIT license
+ * HTMLMinifier v0.0.1 (https://github.com/R4356th/minhtml)
+ * Copyright 2010-2021 Juriy "kangax" Zaytsev, R4356th
+ * Licensed under the GPL-3.0-or-later license
  */
 
 require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
@@ -25763,7 +25763,7 @@ function cleanAttributeValue(tag, attrName, attrValue, options, attrs) {
     return collapseWhitespaceAll(attrValue);
   }
   else if (options.customAttrCollapse && options.customAttrCollapse.test(attrName)) {
-    attrValue = attrValue.replace(/\n+|\r+|\s{2,}/g, '');
+    attrValue = trimWhitespace(attrValue.replace(/ ?[\n\r]+ ?/g, '').replace(/\s{2,}/g, options.conservativeCollapse ? ' ' : ''));
   }
   else if (tag === 'script' && attrName === 'type') {
     attrValue = trimWhitespace(attrValue.replace(/\s*;\s*/g, ';'));
