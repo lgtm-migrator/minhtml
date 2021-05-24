@@ -1,6 +1,5 @@
 # minhtml - a Node.JS package for easily minifying HTML
 
-[![NPM version](https://img.shields.io/npm/minhtml.svg)](https://www.npmjs.com/package/minhtml)
 [![Build Status](https://github.com/R4356th/minhtml/workflows/CI/badge.svg)](https://github.com/R4356th/minhtml/actions?workflow=CI)
 
 [minhtml](https://r4356th.github.io/minhtml) is a highly **configurable**, **well-tested**, **JavaScript-based** HTML minifier.
