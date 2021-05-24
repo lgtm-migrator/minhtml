@@ -60,7 +60,7 @@
   "devDependencies": {
     "grunt": "1.4.0",
     "grunt-browserify": "^6.0.0",
-    "grunt-eslint": "^22.0.0",
+    "grunt-eslint": "^23.0.0",
     "grunt-terser": "^1.0.0",
     "node-qunit-puppeteer": "2.0.3",
     "qunit": "^2.15.0"
