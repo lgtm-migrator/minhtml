@@ -111,33 +111,33 @@ HTMLMinifier can't know that original markup was only half of the tree; it does 
 From NPM for use as a command line app:
 
 ```shell
-npm install html-minifier-terser -g
+npm install minhtml -g
 ```
 
 From NPM for programmatic use:
 
 ```shell
-npm install html-minifier-terser
+npm install minhtml
 ```
 
 From Git:
 
 ```shell
-git clone git://github.com/terser/html-minifier-terser.git
-cd html-minifier-terser
+git clone https://github.com/R4356th/minhtml.git
+cd minhtml
 npm link .
 ```
 
 ## Usage
 
-Note that almost all options are disabled by default. For command line usage please see `html-minifier-terser --help` for a list of available options. Experiment and find what works best for you and your project.
+Note that almost all options are disabled by default. For command line usage, please see ``minhtml --help`` for a list of available options. Experiment and find what works best for you and your project.
 
-* **Sample command line:** ``html-minifier-terser --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true``
+* **Sample command line:** ``minhtml --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true``
 
 ### Node.js
 
 ```js
-var minify = require('html-minifier-terser').minify;
+var minify = require('minhtml').minify;
 var result = minify('<p title="blah" id="moo">foo</p>', {
   removeAttributeQuotes: true
 });
