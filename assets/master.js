@@ -2,7 +2,7 @@
   'use strict';
 
   var minify = (function() {
-    var minify = require('html-minifier-terser').minify;
+    var minify = require('minhtml').minify;
     return function(value, options, callback, errorback) {
       options.log = function(message) {
         console.log(message);
