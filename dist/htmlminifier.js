@@ -1,5 +1,5 @@
 /*!
- * HTMLMinifier v0.1.0 (https://github.com/R4356th/minhtml)
+ * HTMLMinifier v0.2.0 (https://github.com/R4356th/minhtml)
  * Copyright 2010-2021 Juriy "kangax" Zaytsev, R4356th
  * Licensed under the GPL-3.0-or-later license
  */
