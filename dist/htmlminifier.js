@@ -25649,7 +25649,7 @@ exports.createMapFromString = function(values, ignoreCase) {
   return createMap(values.split(/,/), ignoreCase);
 };
 
-},{}],"html-minifier-terser":[function(require,module,exports){
+},{}],"minhtml":[function(require,module,exports){
 'use strict';
 
 var CleanCSS = require('clean-css');
@@ -27014,4 +27014,4 @@ exports.minify = function(value, options) {
 
 
 }).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"buffer":4,"source-map":142}]},{},["html-minifier-terser"]);
+},{"buffer":4,"source-map":142}]},{},["minhtml"]);
