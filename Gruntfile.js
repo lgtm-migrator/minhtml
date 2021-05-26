@@ -49,7 +49,7 @@ module.exports = function(grunt) {
           },
           require: [
             './dist/terser.js:terser',
-            './src/htmlminifier.js:html-minifier-terser'
+            './src/htmlminifier.js:minhtml'
           ]
         },
         src: 'src/htmlminifier.js',
