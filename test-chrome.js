@@ -1,4 +1,5 @@
 #! /usr/bin/env node
+'use strict';
 
 const path = require('path');
 const { runQunitPuppeteer, printOutput, printFailedTests } = require('./node_modules/node-qunit-puppeteer/index.js');
