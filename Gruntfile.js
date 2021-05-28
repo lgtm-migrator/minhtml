@@ -13,14 +13,6 @@ function qunitVersion() {
   }
 }
 
-function isNodejsVersionSupported() {
-  return (
-    process.versions &&
-    process.versions.node &&
-    process.versions.node.split('.')[0] >= 8
-  );
-}
-
 module.exports = function(grunt) {
   // Force use of Unix newlines
   grunt.util.linefeed = '\n';
@@ -163,19 +155,10 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('test', function() {
-    if (isNodejsVersionSupported()) {
       grunt.task.run([
         'dist',
         'qunit'
       ]);
-    }
-    else {
-      // the puppeteer runner uses async / await
-      // which is not supported by NodeJS 6 and older
-      grunt.task.run([
-        'dist'
-      ]);
-    }
   });
 
   grunt.registerTask('default', 'test');
