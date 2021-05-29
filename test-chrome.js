@@ -2,7 +2,7 @@
 'use strict';
 
 const path = require('path');
-const { runQunitPuppeteer, printOutput, printFailedTests } = require('./node_modules/node-qunit-puppeteer/index.js');
+const { runQunitPuppeteer, printFailedTests } = require('./node_modules/node-qunit-puppeteer/index.js');
 
 const args = process.argv.slice(2);
 
