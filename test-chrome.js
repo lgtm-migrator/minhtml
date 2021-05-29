@@ -15,7 +15,7 @@ let targetUrl = args[0];
 
 if (targetUrl.indexOf('http://') === 0 || targetUrl.indexOf('https://') === 0) {
   // Absolute URL, do nothing
-} 
+}
 else if (!path.isAbsolute(targetUrl)) {
   // Relative file path -- append file://
   targetUrl = `file://${path.join(process.cwd(), targetUrl)}`;
@@ -43,12 +43,12 @@ if (typeof puppeteerArgsStr === 'string') {
 runQunitPuppeteer(qunitArgs)
   .then((result) => {
     var output = { passed:result.stats.passed, failed:result.stats.failed, total:result.stats.total, runtime:result.stats.runtime, failures:[] };
-    
     console.log(JSON.stringify(output));
     if (result.stats.failed > 0) {
       // Handle the failed test run
       printFailedTests(result, console);
-    } else {
+    } 
+    else {
       process.exit(0);
     }
   })
