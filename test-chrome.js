@@ -47,7 +47,7 @@ runQunitPuppeteer(qunitArgs)
     if (result.stats.failed > 0) {
       // Handle the failed test run
       printFailedTests(result, console);
-    } 
+    }
     else {
       process.exit(0);
     }
