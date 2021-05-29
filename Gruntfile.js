@@ -69,9 +69,6 @@ module.exports = function(grunt) {
         compress: true,
         mangle: true
       },
-      beautify: {
-        comments: 'all'
-      },
       minify: {
         files: {
           'dist/htmlminifier.min.js': '<%= browserify.src.dest %>'
