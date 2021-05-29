@@ -2,8 +2,6 @@
 *.sublime-workspace
 .DS_Store
 /.jekyll-metadata
-/benchmarks/*.html
-/benchmarks/generated
 /node_modules/
 /npm-debug.log
 .eslintcache
