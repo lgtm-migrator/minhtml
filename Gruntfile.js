@@ -20,16 +20,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     qunit_ver: qunitVersion(),
-    banner: '/*!\n' +
-            ' * HTMLMinifier v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
-            ' * Copyright 2010-<%= grunt.template.today("yyyy") %> Juriy "kangax" Zaytsev, <%= pkg.author %>\n' +
-            ' * Licensed under the <%= pkg.license %> license\n' +
-            ' */\n',
-
     browserify: {
       src: {
         options: {
-          banner: '<%= banner %>',
           preBundleCB: function() {
             var fs = require('fs');
             var file = fs.readFileSync('./node_modules/terser/dist/bundle.min.js');
