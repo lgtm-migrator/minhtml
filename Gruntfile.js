@@ -63,23 +63,10 @@ module.exports = function(grunt) {
         '$1<%= qunit_ver %>$2'
       ]
     },
-
-    terser: {
-      options: {
-        compress: true,
-        mangle: true
-      },
-      minify: {
-        files: {
-          'dist/htmlminifier.min.js': '<%= browserify.src.dest %>'
-        }
-      }
-    }
   });
 
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('grunt-terser');
-
+  
   function report(type, details) {
     grunt.log.writeln(type + ' completed in ' + details.runtime + 'ms');
     details.failures.forEach(function(details) {
@@ -147,8 +134,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('dist', [
     'replace',
-    'browserify',
-    'terser'
+    'browserify'
   ]);
 
   grunt.registerTask('test', function() {

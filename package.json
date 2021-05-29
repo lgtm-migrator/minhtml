@@ -3,9 +3,10 @@
   "description": "Highly configurable, well-tested JavaScript-based HTML minifier.",
   "version": "0.2.0",
   "scripts": {
-    "dist": "grunt dist",
+    "minify": "terser dist/htmlminifier.js --compress --mangle --output dist/htmlminifier.min.js",
+    "dist": "npm run minify && grunt dist",
     "lint": "eslint . --ext .js --cache",
-    "test": "npm run lint && grunt test"
+    "test": "npm run minify && npm run lint && grunt test"
   },
   "keywords": [
     "cli",
@@ -62,7 +63,6 @@
     "eslint": "^7.27.0",
     "grunt": "1.4.1",
     "grunt-browserify": "^6.0.0",
-    "grunt-terser": "^1.0.0",
     "node-qunit-puppeteer": "2.0.3",
     "qunit": "^2.15.0"
   },
