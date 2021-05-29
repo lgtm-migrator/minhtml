@@ -6,7 +6,7 @@
     "minify": "terser dist/htmlminifier.js --compress --mangle --output dist/htmlminifier.min.js",
     "dist": "npm run minify && grunt dist",
     "lint": "eslint . --ext .js --cache",
-    "test": "npm run lint && grunt test"
+    "test": "npm run minify && npm run lint && grunt test"
   },
   "keywords": [
     "cli",
