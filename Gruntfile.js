@@ -37,7 +37,7 @@ module.exports = function(grunt) {
             './src/htmlminifier.js:minhtml'
           ]
         },
-        src: 'src/htmlminifier.js',
+        src: 'src/htmlminifier.js'
       }
     },
 
