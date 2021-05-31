@@ -11,3 +11,8 @@
 * Added support for Node.JS version 16.x
 * Created this changelog
 * Updated README and examples which were saying ``html-minifier-terser`` to reflect package rename.
+
+## v0.3.0
+* HOTFIX: Fixed the CLI which got broken due to updating the ``commander`` package in v0.1.0
+* Dev: Migrated ESLint and Terser-related things away from Grunt
+* Dev: Dropped the ``isNodejsVersionSupported`` function defined in Grunt configuration

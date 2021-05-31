@@ -1,7 +1,7 @@
 {
   "name": "minhtml",
   "description": "Highly configurable, well-tested JavaScript-based HTML minifier.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "scripts": {
     "minify": "terser dist/htmlminifier.js --compress --mangle --output dist/htmlminifier.min.js",
     "dist": "grunt dist && npm run minify",
