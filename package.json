@@ -63,7 +63,7 @@
     "eslint": "^7.27.0",
     "grunt": "1.4.1",
     "grunt-browserify": "^6.0.0",
-    "node-qunit-puppeteer": "2.0.3",
+    "node-qunit-puppeteer": "2.1.0",
     "qunit": "^2.15.0"
   },
   "benchmarkDependencies": {
