@@ -15,8 +15,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-      - name: Check Node.JS and NPM version
-        run: node --version && npm --version
       - name: Install dependencies
         run: npm install --no-optional --no-save --no-update-notifier
       - name: Run tests
