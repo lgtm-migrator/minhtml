@@ -24,9 +24,9 @@ program.version(info.version);
 
 /**
  * Exit program with fatal error.
- * 
- * @param {*} message 
- * 
+ *
+ * @param {*} message
+ *
  */
 function fatal(message) {
   console.error(message);
@@ -35,7 +35,7 @@ function fatal(message) {
 
 /**
  * Parse REGEXes.
- * 
+ *
  * JSON does not support regexes, so, e.g., JSON.parse() will not create
  * a RegExp from the JSON value `[ "/matchString/" ]`, which is
  * technically just an array containing a string that begins and end with
