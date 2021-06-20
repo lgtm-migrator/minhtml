@@ -22,12 +22,20 @@ var program = require('commander');
 program._name = info.name;
 program.version(info.version);
 
+/**
+ * Exit program with fatal error.
+ * 
+ * @param {*} message 
+ * 
+ */
 function fatal(message) {
   console.error(message);
   process.exit(1);
 }
 
 /**
+ * Parse REGEXes.
+ * 
  * JSON does not support regexes, so, e.g., JSON.parse() will not create
  * a RegExp from the JSON value `[ "/matchString/" ]`, which is
  * technically just an array containing a string that begins and end with
@@ -51,6 +59,9 @@ function parseRegExp(value) {
   }
 }
 
+/**
+ * Parse JSON
+ */
 function parseJSON(value) {
   if (value) {
     try {
@@ -65,6 +76,9 @@ function parseJSON(value) {
   }
 }
 
+/**
+ * Parse JSON array
+ */
 function parseJSONArray(value) {
   if (value) {
     value = parseJSON(value);
@@ -72,6 +86,9 @@ function parseJSONArray(value) {
   }
 }
 
+/**
+ * Parse JSON REGEX array
+ */
 function parseJSONRegExpArray(value) {
   value = parseJSONArray(value);
   return value && value.map(parseRegExp);
@@ -256,6 +273,9 @@ function processDirectory(inputDir, outputDir, fileExt) {
   });
 }
 
+/**
+ * Save the minified files.
+ */
 function writeMinify() {
   var minified;
   try {
