@@ -16,9 +16,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
-        run: npm install --no-optional --no-save --no-update-notifier
+        run: npm ci
       - name: Run tests
-        run: npm test --no-update-notifier
+        run: npm test
   ci:
     strategy:
       matrix:
