@@ -2325,15 +2325,6 @@ QUnit.test('style minification', function(assert) {
     minifyCSS: true
   }), output);
 
-  input = '<div style="background: url(\'images/<% image %>\')"></div>';
-  assert.equal(minify(input), input);
-  output = '<div style="background:url(images/<% image %>)"></div>';
-  assert.equal(minify(input, { minifyCSS: true }), output);
-  assert.equal(minify(input, {
-    collapseWhitespace: true,
-    minifyCSS: true
-  }), output);
-
   input = '<style>\np {\n  background: url(images/<% image %>);\n}\n</style>';
   assert.equal(minify(input), input);
   output = '<style>p{background:url(images/<% image %>)}</style>';
