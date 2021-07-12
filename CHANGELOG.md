@@ -16,3 +16,6 @@
 * HOTFIX: Fixed the CLI which got broken due to updating the ``commander`` package in v0.1.0
 * Dev: Migrated ESLint and Terser-related things away from Grunt
 * Dev: Dropped the ``isNodejsVersionSupported`` function defined in Grunt configuration
+
+## v0.4.0
+* BREAKING: Updated the clean-css package to latest - From now on, quotes inside CSS ``url()`` will not be stripped. 
