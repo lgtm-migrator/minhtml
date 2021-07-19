@@ -4,6 +4,7 @@
 if (typeof minify === 'undefined') {
   self.minify = require('minhtml').minify;
 }
+
 QUnit.module('minifier');
 QUnit.test('`minifiy` exists', function(assert) {
   assert.ok(minify);
@@ -2327,7 +2328,7 @@ QUnit.test('style minification', function(assert) {
 
   input = '<style>\np {\n  background: url(images/<% image %>);\n}\n</style>';
   assert.equal(minify(input), input);
-  output = '<style>p{background:url(\'images/<% image %>\')}</style>';
+  output = '<style>p{background:url(images/<% image %>)}</style>';
   assert.equal(minify(input, { minifyCSS: true }), output);
   assert.equal(minify(input, {
     collapseWhitespace: true,
