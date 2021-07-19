@@ -107,6 +107,9 @@
       "error",
       "after"
     ],
+    "plugins": [
+      "qunit"
+    ],
     "quote-props": [
       "error",
       "as-needed"
