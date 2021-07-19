@@ -60,7 +60,7 @@
     "terser": "^4.6.3"
   },
   "devDependencies": {
-    "eslint": "^7.30.0",
+    "eslint": "^7.31.0",
     "eslint-plugin-qunit": "^6.2.0",
     "grunt": "1.4.1",
     "grunt-browserify": "^6.0.0",
