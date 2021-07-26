@@ -1109,9 +1109,9 @@ QUnit.test('removing javascript type attributes', function(assert) {
   output = '<script>alert(1)</script>';
   assert.equal(minify(input, { removeScriptTypeAttributes: true }), output);
 
-  input = '<script type="modules">alert(1)</script>';
+  input = '<script type="module">alert(1)</script>';
   assert.equal(minify(input, { removeScriptTypeAttributes: false }), input);
-  output = '<script type="modules">alert(1)</script>';
+  output = '<script type="module">alert(1)</script>';
   assert.equal(minify(input, { removeScriptTypeAttributes: true }), output);
 
   input = '<script type="text/javascript">alert(1)</script>';
