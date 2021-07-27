@@ -98,6 +98,12 @@ function parseString(value) {
   return value;
 }
 
+// If no arguments have been specified on the command line, show help message and exit
+if (!process.argv.slice(2).length) {
+  program.outputHelp();
+  process.exit(1);
+}
+
 var mainOptions = {
   caseSensitive: 'Treat attributes in case sensitive manner (useful for SVG; e.g. viewBox)',
   collapseBooleanAttributes: 'Omit attribute values from boolean attributes',
