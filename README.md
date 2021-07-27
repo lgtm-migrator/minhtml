@@ -1,7 +1,7 @@
 # minhtml - a Node.JS package for easily minifying HTML
 [![Continuous Integration](https://github.com/R4356th/minhtml/actions/workflows/ci.yml/badge.svg)](https://github.com/R4356th/minhtml/actions/workflows/ci.yml)
 
-[minhtml](https://r4356th.github.io/minhtml), short for "minify html" is a highly **configurable**, **well-tested**, **JavaScript-based** HTML minifier.
+[minhtml](https://r4356th.github.io/minhtml), short for "minify html" is a highly **configurable**, **well-tested**, **JavaScript-based** HTML minifier. It also supports Mustache templates.
 
 See [corresponding blog post by the original author](http://perfectionkills.com/experimenting-with-html-minifier/) for all the gory details of [how it works](http://perfectionkills.com/experimenting-with-html-minifier/#how_it_works), [description of each option](http://perfectionkills.com/experimenting-with-html-minifier/#options), [testing results](http://perfectionkills.com/experimenting-with-html-minifier/#field_testing) and [conclusions](http://perfectionkills.com/experimenting-with-html-minifier/#cost_and_benefits).
 
