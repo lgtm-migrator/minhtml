@@ -9,4 +9,7 @@ updates:
     reviewers:
     - r4356th
     versioning-strategy: increase
+    commit-message:
+      prefix: deps
+      prefix-development: deps-dev
 
