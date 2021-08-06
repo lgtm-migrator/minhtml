@@ -9,23 +9,22 @@ See [corresponding blog post by the original author](http://perfectionkills.com/
 
 ## Minification comparison
 
-How does HTMLMinifier compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/#q=html+minifier)) as well as [htmlcompressor.com](http://htmlcompressor.com) and [minimize](https://github.com/Swaagie/minimize)?
+How does HTMLMinifier compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/#q=html+minifier)) as well as [minimize](https://github.com/Swaagie/minimize)?
 
-| Site                                                                         | Original size *(KB)* | HTMLMinifier | minimize | Will Peavy | htmlcompressor.com |
-| ---------------------------------------------------------------------------- |:--------------------:| ------------:| --------:| ----------:| ------------------:|
-| [Google](https://www.google.com/)                                            | 49                   | **44**       | 49       | 51         | n/a                |
-| [Twitter](https://twitter.com/)                                              | 69                   | **61**       | 68       | 68         | n/a                |
-| [Stack Overflow](https://stackoverflow.com/)                                 | 202                  | **164**      | 178      | 178        | n/a                |
-| [HTMLMinifier](https://github.com/kangax/html-minifier)                      | 235                  | **149**      | 212      | 227        | n/a                |
-| [Bootstrap CSS](https://getbootstrap.com/docs/3.3/css/)                      | 271                  | **260**      | 269      | 229        | n/a                |
-| [BBC](https://www.bbc.co.uk/)                                                | 335                  | **308**      | 332      | 334        | n/a                |
-| [Amazon](https://www.amazon.co.uk/)                                          | 455                  | **406**      | 444      | 457        | n/a                |
-| [Wikipedia](https://en.wikipedia.org/wiki/President_of_the_United_States)    | 692                  | **558**      | 671      | 697        | n/a                |
-| [New York Times](https://www.nytimes.com/)                                   | 769                  | **688**      | 765      | 754        | n/a                |
-| [Eloquent Javascript](https://eloquentjavascript.net/1st_edition/print.html) | 870                  | **815**      | 840      | 864        | n/a                |
-| [NBC](https://www.nbc.com/)                                                  | 1860                 | **1715**     | 1846     | 1866       | n/a                |
-| [ES draft](https://tc39.github.io/ecma262/)                                  | 5912                 | **5194**     | 5384     | n/a        | n/a                |
-
+| Site                                                                         | Original size *(KB)* | HTMLMinifier | minimize | Will Peavy |
+| ---------------------------------------------------------------------------- |:--------------------:| ------------:| --------:| ----------:|
+| [Google](https://www.google.com/)                                            | 49                   | **44**       | 49       | 51         |
+| [Twitter](https://twitter.com/)                                              | 69                   | **61**       | 68       | 68         |
+| [Stack Overflow](https://stackoverflow.com/)                                 | 202                  | **164**      | 178      | 178        |
+| [HTMLMinifier](https://github.com/kangax/html-minifier)                      | 222                  | **136**      | 200      | 214        |
+| [Bootstrap CSS](https://getbootstrap.com/docs/3.3/css/)                      | 271                  | **260**      | 269      | 229        |
+| [BBC](https://www.bbc.co.uk/)                                                | 333                  | **307**      | 331      | 332        |
+| [Amazon](https://www.amazon.co.uk/)                                          | 459                  | **410**      | 449      | 461        |
+| [Wikipedia](https://en.wikipedia.org/wiki/President_of_the_United_States)    | 692                  | **558**      | 671      | 697        |
+| [New York Times](https://www.nytimes.com/)                                   | 770                  | **688**      | 766      | 755        |
+| [Eloquent Javascript](https://eloquentjavascript.net/1st_edition/print.html) | 870                  | **815**      | 840      | 864        |
+| [NBC](https://www.nbc.com/)                                                  | 1857                 | **1712**     | 1844     | 1864       |
+| [ES draft](https://tc39.github.io/ecma262/)                                  | 5912                 | **5194**     | 5384     | n/a        |
 ## Options Quick Reference
 
 Most of the options are disabled by default.

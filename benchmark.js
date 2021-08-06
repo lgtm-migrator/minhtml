@@ -45,7 +45,7 @@ var progress = new Progress('[:bar] :etas :fileName', {
 });
 
 var table = new Table({
-  head: ['File', 'Before', 'After', 'Minimize', 'Will Peavy', 'htmlcompressor.com', 'Savings', 'Time'],
+  head: ['File', 'Before', 'After', 'Minimize', 'Will Peavy', 'Savings', 'Time'],
   colWidths: [fileNames.reduce(function(length, fileName) {
     return Math.max(length, fileName.length);
   }, 0) + 2, 25, 25, 25, 25, 25, 20, 10]
@@ -149,8 +149,7 @@ function generateMarkdownTable() {
     'Original size *(KB)*',
     'HTMLMinifier',
     'minimize',
-    'Will Peavy',
-    'htmlcompressor.com'
+    'Will Peavy'
   ];
   fileNames.forEach(function(fileName) {
     var row = rows[fileName].report;
@@ -333,78 +332,13 @@ run(fileNames.map(function(fileName) {
       });
     }
 
-    function testHTMLCompressor(done) {
-      readText(filePath, function(data) {
-        var options = url.parse('https://htmlcompressor.com/compress_ajax_v2.php');
-        options.method = 'POST';
-        options.headers = {
-          'Accept-Encoding': 'gzip',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        };
-        var info = infos.compressor;
-
-        function failed() {
-          // Site refused to process content
-          if (info) {
-            info.size = 0;
-            info.gzSize = 0;
-            info.lzSize = 0;
-            info.brSize = 0;
-            info = null;
-            done();
-          }
-        }
-
-        https.request(options, function(res) {
-          if (res.headers['content-encoding'] === 'gzip') {
-            res = res.pipe(zlib.createGunzip());
-          }
-          res.setEncoding('utf8');
-          var response = '';
-          res.on('data', function(chunk) {
-            response += chunk;
-          }).on('end', function() {
-            try {
-              response = JSON.parse(response);
-            }
-            catch (e) {
-              response = {};
-            }
-            if (info && response.success) {
-              writeText(info.filePath, response.result, function() {
-                readSizes(info, done);
-              });
-            }
-            // Site refused to process content
-            else {
-              failed();
-            }
-          });
-        }).on('error', failed).end(querystring.stringify({
-          code_type: 'html',
-          html_level: 3,
-          html_strip_quotes: 1,
-          minimize_style: 1,
-          minimize_events: 1,
-          minimize_js_href: 1,
-          minimize_css: 1,
-          minimize_js: 1,
-          html_optional_cdata: 1,
-          js_engine: 'yui',
-          js_fallback: 1,
-          code: data
-        }));
-      });
-    }
-
     run([
       function(done) {
         readSizes(original, done);
       },
       testHTMLMinifier,
       testMinimize,
-      testWillPeavy,
-      testHTMLCompressor
+      testWillPeavy
     ], function() {
       var display = [
         [fileName, '+ gzip', '+ lzma', '+ brotli'].join('\n'),
