@@ -136,7 +136,7 @@ Note that almost all options are disabled by default. For command line usage, pl
 
 ```js
 var minify = require('minhtml').minify;
-var result = minify('<p title="blah" id="moo">foo</p>', {
+var result = await minify('<p title="blah" id="moo">foo</p>', {
   removeAttributeQuotes: true
 });
 result; // '<p title=blah id=moo>foo</p>'

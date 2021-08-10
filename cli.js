@@ -2,11 +2,6 @@
 /**
  * minhtml CLI tool
  *
- * @author R4356th
- * @copyright 2021 Radman Siddiki
- *
- * @license GPL-v3.0
- *
  */
 
 'use strict';
@@ -280,8 +275,8 @@ function processDirectory(inputDir, outputDir, fileExt) {
 }
 
 /**
- * Save the minified files.
- */
+* Save the minified files.
+*/
 function writeMinify() {
   var minified;
   try {
