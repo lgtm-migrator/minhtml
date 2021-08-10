@@ -19,3 +19,15 @@
 
 ## v0.4.0
 * BREAKING: Updated the clean-css package to latest - From now on, quotes inside CSS ``url()`` will not be stripped. 
+
+
+## v0.5.0
+* BREAKING: Updated the terser package - From now on, minify() will be async.
+* The license is now shipped with this package.
+* The CLI now outputs a help message if no argument has been specified.
+* `meter` and `output` tags are now treated as inline tags.
+* Mustache templates are now officially supported.
+* Updated the clean-css package
+
+## v0.5.1
+* Just updated this changelog which I forgot about when releasing v0.5.0.
