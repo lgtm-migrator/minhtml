@@ -31,3 +31,6 @@
 
 ## v0.5.1
 * Just updated this changelog which I forgot about when releasing v0.5.0.
+
+## v0.5.2
+* The terser update had broken the CLI and has now been fixed.

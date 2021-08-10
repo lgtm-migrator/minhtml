@@ -7732,8 +7732,10 @@ module.exports = require('./lib/clean');
 },{"./lib/clean":9}],9:[function(require,module,exports){
 (function (process){(function (){
 /**
- * Clean-css - https://github.com/clean-css/clean-css
+ * Clean-css - https://github.com/jakubpawlowicz/clean-css
  * Released under the terms of MIT license
+ *
+ * Copyright (C) 2017 JakubPawlowicz.com
  */
 
 var level0Optimize = require('./optimizer/level-0/optimize');
@@ -7834,7 +7836,7 @@ function minifyInBatchesFromArray(input, options, maybeSourceMap, maybeCallback)
 
   function whenHashBatchDone(innerErrors, output) {
     outputAsHash = Object.assign(outputAsHash, output);
-    errors = errors.concat(innerErrors);
+    errors.concat(innerErrors);
   }
 
   for (i = 0, l = input.length; i < l; i++) {
@@ -7844,7 +7846,7 @@ function minifyInBatchesFromArray(input, options, maybeSourceMap, maybeCallback)
       inputValue = input[i];
 
       outputAsHash[inputValue] = minify([inputValue], options);
-      errors = errors.concat(outputAsHash[inputValue].errors);
+      errors.concat(outputAsHash[inputValue].errors);
     }
   }
 
@@ -7866,7 +7868,7 @@ function minifyInBatchesFromHash(input, options, maybeSourceMap, maybeCallback) 
     inputValue = input[inputKey];
 
     outputAsHash[inputKey] = minify(inputValue.styles, options, inputValue.sourceMap);
-    errors = errors.concat(outputAsHash[inputKey].errors);
+    errors.concat(outputAsHash[inputKey].errors);
   }
 
   return callback ?
@@ -7942,8 +7944,9 @@ function runner(localOnly) {
 }
 
 function optimize(tokens, context) {
-  var optimized = level0Optimize(tokens, context);
+  var optimized;
 
+  optimized = level0Optimize(tokens, context);
   optimized = OptimizationLevel.One in context.options.level ?
     level1Optimize(tokens, context) :
     tokens;
@@ -9941,6 +9944,7 @@ function font(property, configuration, validator) {
   var isVariantValid;
   var isWeightSet = false;
   var isWeightValid;
+  var isSizeSet = false;
   var appendableFamilyName = false;
 
   if (!values[index]) {
@@ -9997,6 +10001,7 @@ function font(property, configuration, validator) {
   // now comes font-size ...
   if (validator.isFontSizeKeyword(values[index][1]) || validator.isUnit(values[index][1]) && !validator.isDynamicUnit(values[index][1])) {
     size.value = [values[index]];
+    isSizeSet = true;
     index++;
   } else {
     throw new InvalidPropertyError('Missing font size at ' + formatPosition(values[0][2][0]) + '. Ignoring.');
@@ -10007,7 +10012,7 @@ function font(property, configuration, validator) {
   }
 
   // ... and perhaps line-height
-  if (values[index] && values[index][1] == Marker.FORWARD_SLASH && values[index + 1] && (validator.isLineHeightKeyword(values[index + 1][1]) || validator.isUnit(values[index + 1][1]) || validator.isNumber(values[index + 1][1]))) {
+  if (isSizeSet && values[index] && values[index][1] == Marker.FORWARD_SLASH && values[index + 1] && (validator.isLineHeightKeyword(values[index + 1][1]) || validator.isUnit(values[index + 1][1]) || validator.isNumber(values[index + 1][1]))) {
     height.value = [values[index + 1]];
     index++;
     index++;
@@ -10715,7 +10720,7 @@ function background(property, configuration, lastInMultiplex) {
   return restored;
 }
 
-function borderRadius(property) {
+function borderRadius(property, configuration) {
   if (property.multiplex) {
     var horizontal = shallowClone(property);
     var vertical = shallowClone(property);
@@ -10735,8 +10740,8 @@ function borderRadius(property) {
       vertical.components.push(verticalComponent);
     }
 
-    var horizontalValues = fourValues(horizontal);
-    var verticalValues = fourValues(vertical);
+    var horizontalValues = fourValues(horizontal, configuration);
+    var verticalValues = fourValues(vertical, configuration);
 
     if (horizontalValues.length == verticalValues.length &&
         horizontalValues[0][1] == verticalValues[0][1] &&
@@ -10748,7 +10753,7 @@ function borderRadius(property) {
       return horizontalValues.concat([[Token.PROPERTY_VALUE, Marker.FORWARD_SLASH]]).concat(verticalValues);
     }
   } else {
-    return fourValues(property);
+    return fourValues(property, configuration);
   }
 }
 
@@ -10980,7 +10985,6 @@ var DEFAULT_ROUNDING_PRECISION = require('../../options/rounding-precision').DEF
 var PROPERTY_NAME_PATTERN = /^(?:\-chrome\-|\-[\w\-]+\w|\w[\w\-]+\w|\w{1,}|\-\-\S+)$/;
 var IMPORT_PREFIX_PATTERN = /^@import/i;
 var URL_PREFIX_PATTERN = /^url\(/i;
-var VARIABLE_NAME_PATTERN = /^--\S+$/;
 
 function startsAsUrl(value) {
   return URL_PREFIX_PATTERN.test(value);
@@ -11056,10 +11060,6 @@ function optimizeBody(rule, properties, context) {
 
     if (property.block) {
       optimizeBody(rule, property.value[0][1], context);
-      continue;
-    }
-
-    if (VARIABLE_NAME_PATTERN.test(name)) {
       continue;
     }
 
@@ -11192,7 +11192,7 @@ function buildPrecisionOptions(roundingPrecision) {
 
   if (optimizable.length > 0) {
     precisionOptions.enabled = true;
-    precisionOptions.decimalPointMatcher = new RegExp('(\\d)\\.($|' + optimizable.join('|') + ')($|\\W)', 'g');
+    precisionOptions.decimalPointMatcher = new RegExp('(\\d)\\.($|' + optimizable.join('|') + ')($|\W)', 'g');
     precisionOptions.zeroMatcher = new RegExp('(\\d*)(\\.\\d+)(' + optimizable.join('|') + ')', 'g');
   }
 
@@ -12441,9 +12441,12 @@ var Marker = require('../../../tokenizer/marker');
 
 var CALC_DIVISION_WHITESPACE_PATTERN = /\) ?\/ ?/g;
 var COMMA_AND_SPACE_PATTERN = /, /g;
+var LINE_BREAK_PATTERN = /\r?\n/g;
 var MULTI_WHITESPACE_PATTERN = /\s+/g;
 var FUNCTION_CLOSING_BRACE_WHITESPACE_PATTERN = /\s+(;?\))/g;
 var FUNCTION_OPENING_BRACE_WHITESPACE_PATTERN = /(\(;?)\s+/g;
+var VARIABLE_NAME_PATTERN = /^--\S+$/;
+var VARIABLE_VALUE_PATTERN = /^var\(\s*--\S+\s*\)$/;
 
 var plugin = {
   level1: {
@@ -12452,7 +12455,11 @@ var plugin = {
         return value;
       }
 
-      if (value.indexOf(' ') == -1 || value.indexOf('expression') === 0) {
+      if (VARIABLE_NAME_PATTERN.test(name) && !VARIABLE_VALUE_PATTERN.test(value)) {
+        return value;
+      }
+
+      if ((value.indexOf(' ') == -1 && value.indexOf('\n') == -1) || value.indexOf('expression') === 0) {
         return value;
       }
 
@@ -12460,6 +12467,7 @@ var plugin = {
         return value;
       }
 
+      value = value.replace(LINE_BREAK_PATTERN, '');
       value = value.replace(MULTI_WHITESPACE_PATTERN, ' ');
 
       if (value.indexOf('calc') > -1) {
@@ -14093,7 +14101,7 @@ function overrideShorthand(property, by) {
   by.unused = true;
 
   for (var i = 0, l = property.components.length; i < l; i++) {
-    override(property.components[i], by.components[i]);
+    override(property.components[i], by.components[i], property.multiplex);
   }
 }
 
@@ -14487,7 +14495,7 @@ function overrideProperties(properties, withMerging, compatibility, validator) {
             overridingComponent = right.components[k];
             mayOverride = configuration[overridingComponent.name].canOverride || sameValue;
 
-            overridable = everyValuesPair(mayOverride.bind(null, validator), overriddenComponent, overridingComponent);
+            overridable = overridable && everyValuesPair(mayOverride.bind(null, validator), overriddenComponent, overridingComponent);
           }
         } else {
           mayOverride = configuration[right.name].canOverride || sameValue;
@@ -15566,7 +15574,7 @@ function restructure(tokens, context) {
 
         if (movedToBeDropped.indexOf(k) == -1 && (!canReorderSingle(property, movedProperty, specificityCache) && !boundToAnotherPropertyInCurrrentToken(property, movedProperty, token) ||
             movableTokens[movedProperty[4]] && movableTokens[movedProperty[4]].length === mergeLimit)) {
-          dropPropertiesAt(i + 1, movedProperty);
+          dropPropertiesAt(i + 1, movedProperty, token);
 
           if (movedToBeDropped.indexOf(k) == -1) {
             movedToBeDropped.push(k);
@@ -16818,14 +16826,12 @@ function compatibilityFrom(source) {
 
 function merge(source, target) {
   for (var key in source) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      var value = source[key];
+    var value = source[key];
 
-      if (Object.prototype.hasOwnProperty.call(target, key) && typeof value === 'object' && !Array.isArray(value)) {
-        target[key] = merge(value, target[key] || {});
-      } else {
-        target[key] = key in target ? target[key] : value;
-      }
+    if (typeof value === 'object' && !Array.isArray(value)) {
+      target[key] = merge(value, target[key] || {});
+    } else {
+      target[key] = key in target ? target[key] : value;
     }
   }
 
@@ -19053,7 +19059,7 @@ function intoTokens(source, externalContext, internalContext, isNested) {
       level = levels.pop();
       buffer.push(character);
       isBufferEmpty = false;
-    } else if (character != Marker.CLOSE_ROUND_BRACKET && character != Marker.OPEN_ROUND_BRACKET && level != Level.COMMENT && !isQuoted && roundBracketLevel > 0) {
+    } else if (!isCommentStart && !isCommentEnd && character != Marker.CLOSE_ROUND_BRACKET && character != Marker.OPEN_ROUND_BRACKET && level != Level.COMMENT && !isQuoted && roundBracketLevel > 0) {
       // character inside any function, e.g. hsla(.<--
       buffer.push(character);
       isBufferEmpty = false;
