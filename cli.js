@@ -230,13 +230,13 @@ function mkdir(outputDir, callback) {
 }
 
 function processFile(inputFile, outputFile) {
-  fs.readFile(inputFile, { encoding: 'utf8' }, function(err, data) {
+  fs.readFile(inputFile, { encoding: 'utf8' }, async function(err, data) {
     if (err) {
       fatal('Cannot read ' + inputFile + '\n' + err.message);
     }
     var minified;
     try {
-      minified = minify(data, createOptions());
+      minified = await minify(data, createOptions());
     }
     catch (e) {
       fatal('Minification error on ' + inputFile + '\n' + e.message);
@@ -250,7 +250,7 @@ function processFile(inputFile, outputFile) {
 }
 
 function processDirectory(inputDir, outputDir, fileExt) {
-  fs.readdir(inputDir, function(err, files) {
+  fs.readdir(inputDir, async function(err, files) {
     if (err) {
       fatal('Cannot read directory ' + inputDir + '\n' + err.message);
     }
@@ -277,10 +277,10 @@ function processDirectory(inputDir, outputDir, fileExt) {
 /**
 * Save the minified files.
 */
-function writeMinify() {
+async function writeMinify() {
   var minified;
   try {
-    minified = minify(content, createOptions());
+    minified = await minify(content, createOptions());
   }
   catch (e) {
     fatal('Minification error:\n' + e.message);
