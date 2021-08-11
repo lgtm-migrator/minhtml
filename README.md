@@ -9,14 +9,14 @@ See [corresponding blog post by the original author](http://perfectionkills.com/
 
 ## Minification comparison
 
-How does HTMLMinifier compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/#q=html+minifier)) as well as [minimize](https://github.com/Swaagie/minimize)?
+How does minhtml compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/#q=html+minifier)) as well as [minimize](https://github.com/Swaagie/minimize)?
 
-| Site                                                                         | Original size *(KB)* | HTMLMinifier | minimize | Will Peavy |
+| Site                                                                         | Original size *(KB)* | minhtml | minimize | Will Peavy |
 | ---------------------------------------------------------------------------- |:--------------------:| ------------:| --------:| ----------:|
 | [Google](https://www.google.com/)                                            | 49                   | **44**       | 49       | 51         |
 | [Twitter](https://twitter.com/)                                              | 69                   | **61**       | 68       | 68         |
 | [Stack Overflow](https://stackoverflow.com/)                                 | 202                  | **164**      | 178      | 178        |
-| [HTMLMinifier](https://github.com/kangax/html-minifier)                      | 222                  | **136**      | 200      | 214        |
+| [minhtml](https://github.com/R4356th/minhtml)                           | 222                  | **136**      | 200      | 214        |
 | [Bootstrap CSS](https://getbootstrap.com/docs/3.3/css/)                      | 271                  | **260**      | 269      | 229        |
 | [BBC](https://www.bbc.co.uk/)                                                | 333                  | **307**      | 331      | 332        |
 | [Amazon](https://www.amazon.co.uk/)                                          | 459                  | **410**      | 449      | 461        |
@@ -25,6 +25,7 @@ How does HTMLMinifier compare to other solutions — [HTML Minifier from Will Pe
 | [Eloquent Javascript](https://eloquentjavascript.net/1st_edition/print.html) | 870                  | **815**      | 840      | 864        |
 | [NBC](https://www.nbc.com/)                                                  | 1857                 | **1712**     | 1844     | 1864       |
 | [ES draft](https://tc39.github.io/ecma262/)                                  | 5912                 | **5194**     | 5384     | n/a        |
+
 ## Options Quick Reference
 
 Most of the options are disabled by default.
@@ -86,7 +87,7 @@ SVG tags are automatically recognized, and when they are minified, both case-sen
 
 ### Working with invalid markup
 
-HTMLMinifier **can't work with invalid or partial chunks of markup**. This is because it parses markup into a tree structure, then modifies it (removing anything that was specified for removal, ignoring anything that was specified to be ignored, etc.), then it creates a markup out of that tree and returns it.
+minhtml **can't work with invalid or partial chunks of markup**. This is because it parses markup into a tree structure, then modifies it (removing anything that was specified for removal, ignoring anything that was specified to be ignored, etc.), then it creates a markup out of that tree and returns it.
 
 Input markup (e.g. `<p id="">foo`)
 
@@ -102,7 +103,7 @@ Transformation of internal representation (e.g. removal of `id` attribute)
 
 Output of resulting markup (e.g. `<p>foo</p>`)
 
-HTMLMinifier can't know that original markup was only half of the tree; it does its best to try to parse it as a full tree and it loses information about tree being malformed or partial in the beginning. As a result, it can't create a partial/malformed tree at the time of the output.
+minhtml can't know that original markup was only half of the tree; it does its best to try to parse it as a full tree and it loses information about tree being malformed or partial in the beginning. As a result, it can't create a partial/malformed tree at the time of the output.
 
 ## Installation Instructions
 
