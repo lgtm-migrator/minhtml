@@ -3,13 +3,13 @@
 
   var minify = (function() {
     var minify = require('minhtml').minify;
-    return function(value, options, callback, errorback) {
+    return async function(value, options, callback, errorback) {
       options.log = function(message) {
         console.log(message);
       };
       var minified;
       try {
-        minified = minify(value, options);
+        minified = await minify(value, options);
       }
       catch (err) {
         return errorback(err);
