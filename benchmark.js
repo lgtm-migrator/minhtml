@@ -147,7 +147,7 @@ function generateMarkdownTable() {
   var headers = [
     'Site',
     'Original size *(KB)*',
-    'HTMLMinifier',
+    'minhtml',
     'minimize',
     'Will Peavy'
   ];
@@ -274,7 +274,7 @@ run(fileNames.map(function(fileName) {
       ], done);
     }
 
-    function testHTMLMinifier(done) {
+    function testminhtml(done) {
       var info = infos.minifier;
       info.startTime = Date.now();
       var args = [filePath, '-c', 'sample-cli-config-file.conf', '--minify-urls', site, '-o', info.filePath];
@@ -336,7 +336,7 @@ run(fileNames.map(function(fileName) {
       function(done) {
         readSizes(original, done);
       },
-      testHTMLMinifier,
+      testminhtml,
       testMinimize,
       testWillPeavy
     ], function() {
