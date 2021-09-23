@@ -1,3 +1,13 @@
+## v0.6.0
+* Updated terser
+* Updated commander
+* Benchmarks: Replaced references to ``html-minifier`` with ``minhtml``
+* Documentation: Replaced references to ``html-minifier`` with ``minhtml``
+* Changelog: Reordered items in reverse chronological order
+* Updated ansi-regex to fix a security vulnerability warning
+* Documentation: Added a Code of Conduct
+* Documentation: Added contributing guidelines
+
 ## v0.5.2
 * The terser update had broken the CLI and has now been fixed.
 
