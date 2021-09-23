@@ -3,27 +3,11 @@ name: Continuous Integration
 on: [push, pull_request]
 
 jobs:
-  ci-latest:
-    strategy:
-      matrix:
-        platform: [ubuntu-latest]
-        node: ['*']
-    name: CI - Node latest (${{ matrix.platform }})
-    runs-on: ${{ matrix.platform }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm test
   ci:
     strategy:
       matrix:
         platform: [ubuntu-latest]
-        node: [ '16', '12', '10']
+        node: [ '16', '14', '12', '10']
     name: CI - Node ${{ matrix.node }} (${{ matrix.platform }})
     runs-on: ${{ matrix.platform }}
     steps:
@@ -33,7 +17,5 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
         run: npm install --no-optional --no-save --no-update-notifier
-      - name: Generate build files
-        run: npm run dist
       - name: Run tests
         run: npm test --no-update-notifier
