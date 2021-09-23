@@ -107,7 +107,7 @@ minhtml can't know that original markup was only half of the tree; it does its b
 
 ## Installation Instructions
 
-From NPM for use as a command line app:
+From NPM for use as a (global) command line app:
 
 ```shell
 npm install minhtml -g
