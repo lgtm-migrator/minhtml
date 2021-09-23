@@ -27,3 +27,6 @@ Setting up this repository locally is a matter of just two steps:
  
  ``git push https://github.com/<YOURUSERNAME>/minhtml.git``
  .
+
+
+**N.B: No matter what kind of contribution you make, they must all be in line with the [Code of Conduct](CODE_OF_CONDUCT.md).
