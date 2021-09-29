@@ -2,11 +2,11 @@
 'use strict';
 
 if (typeof minify === 'undefined') {
-  self.minify = require('minhtml').minify;
+  global.minify = require('../src/htmlminifier.js').minify;
 }
 
 QUnit.module('minifier');
-QUnit.test('`minifiy` exists', function(assert) {
+QUnit.test('`minify` exists', function(assert) {
   assert.ok(minify);
 });
 

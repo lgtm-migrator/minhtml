@@ -1,18 +1,5 @@
 'use strict';
 
-function qunitVersion() {
-  var prepareStackTrace = Error.prepareStackTrace;
-  Error.prepareStackTrace = function() {
-    return '';
-  };
-  try {
-    return require('qunit').version;
-  }
-  finally {
-    Error.prepareStackTrace = prepareStackTrace;
-  }
-}
-
 module.exports = function(grunt) {
   // Force use of Unix newlines
   grunt.util.linefeed = '\n';
@@ -40,10 +27,6 @@ module.exports = function(grunt) {
         src: 'src/htmlminifier.js',
         dest: 'dist/htmlminifier.js'
       }
-    },
-
-    qunit: {
-      htmlminifier: ['./tests/minifier', 'tests/index.html']
     },
 
     replace: {
@@ -75,47 +58,6 @@ module.exports = function(grunt) {
     return details.failed;
   }
 
-  grunt.registerMultiTask('qunit', function() {
-    var done = this.async();
-    var errors = [];
-
-    function run(testType, binPath, testPath) {
-      var testrunner;
-      if (testType === 'web') {
-        testrunner = 'test-chrome.js';
-      }
-      else {
-        testrunner = 'test.js';
-      }
-      grunt.util.spawn({
-        cmd: binPath,
-        args: [testrunner, testPath]
-      }, function(error, result) {
-        if (error) {
-          grunt.log.error(result.stderr);
-          grunt.log.error(testType + ' test failed to load');
-          errors.push(-1);
-        }
-        else {
-          var output = result.stdout;
-          var index = output.lastIndexOf('\n');
-          if (index !== -1) {
-            // There's something before the report JSON
-            // Log it to the console -- it's probably some debug output:
-            console.log(output.slice(0, index));
-            output = output.slice(index);
-          }
-          errors.push(report(testType, JSON.parse(output)));
-        }
-        if (errors.length === 2) {
-          done(!errors[0] && !errors[1]);
-        }
-      });
-    }
-
-    run('node', process.argv[0], this.data[0]);
-    run('web', process.argv[0], this.data[1]);
-  });
 
   grunt.registerMultiTask('replace', function() {
     var pattern = this.data[0];
@@ -133,7 +75,6 @@ module.exports = function(grunt) {
   grunt.registerTask('test', function() {
       grunt.task.run([
         'dist',
-        'qunit'
       ]);
   });
 
