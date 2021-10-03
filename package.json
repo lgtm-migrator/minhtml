@@ -7,7 +7,7 @@
     "dist": "grunt dist && npm run minify",
     "test:lint": "eslint . --ext .js --cache",
     "test:unit": "qunit ./tests/minifier.js",
-    "test": "npm run dist && npm run test:lint && npm run test:unit && grunt test"
+    "test": "npm run dist && npm run test:lint && npm run test:unit"
   },
   "keywords": [
     "cli",
