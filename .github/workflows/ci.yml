@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: npm install --no-optional --no-save --no-update-notifier
       - name: Run tests
-        run: npm run test:lint && npm run test:unit
+        run: npm run test
         
   ci-old-node:
     strategy:
