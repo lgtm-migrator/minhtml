@@ -7732,10 +7732,8 @@ module.exports = require('./lib/clean');
 },{"./lib/clean":9}],9:[function(require,module,exports){
 (function (process){(function (){
 /**
- * Clean-css - https://github.com/jakubpawlowicz/clean-css
+ * Clean-css - https://github.com/clean-css/clean-css
  * Released under the terms of MIT license
- *
- * Copyright (C) 2017 JakubPawlowicz.com
  */
 
 var level0Optimize = require('./optimizer/level-0/optimize');
@@ -7836,7 +7834,10 @@ function minifyInBatchesFromArray(input, options, maybeSourceMap, maybeCallback)
 
   function whenHashBatchDone(innerErrors, output) {
     outputAsHash = Object.assign(outputAsHash, output);
-    errors.concat(innerErrors);
+
+    if (innerErrors !== null) {
+      errors = errors.concat(innerErrors);
+    }
   }
 
   for (i = 0, l = input.length; i < l; i++) {
@@ -7846,7 +7847,7 @@ function minifyInBatchesFromArray(input, options, maybeSourceMap, maybeCallback)
       inputValue = input[i];
 
       outputAsHash[inputValue] = minify([inputValue], options);
-      errors.concat(outputAsHash[inputValue].errors);
+      errors = errors.concat(outputAsHash[inputValue].errors);
     }
   }
 
@@ -7868,7 +7869,7 @@ function minifyInBatchesFromHash(input, options, maybeSourceMap, maybeCallback) 
     inputValue = input[inputKey];
 
     outputAsHash[inputKey] = minify(inputValue.styles, options, inputValue.sourceMap);
-    errors.concat(outputAsHash[inputKey].errors);
+    errors = errors.concat(outputAsHash[inputKey].errors);
   }
 
   return callback ?
@@ -7944,9 +7945,8 @@ function runner(localOnly) {
 }
 
 function optimize(tokens, context) {
-  var optimized;
+  var optimized = level0Optimize(tokens, context);
 
-  optimized = level0Optimize(tokens, context);
   optimized = OptimizationLevel.One in context.options.level ?
     level1Optimize(tokens, context) :
     tokens;
@@ -9944,7 +9944,6 @@ function font(property, configuration, validator) {
   var isVariantValid;
   var isWeightSet = false;
   var isWeightValid;
-  var isSizeSet = false;
   var appendableFamilyName = false;
 
   if (!values[index]) {
@@ -10001,7 +10000,6 @@ function font(property, configuration, validator) {
   // now comes font-size ...
   if (validator.isFontSizeKeyword(values[index][1]) || validator.isUnit(values[index][1]) && !validator.isDynamicUnit(values[index][1])) {
     size.value = [values[index]];
-    isSizeSet = true;
     index++;
   } else {
     throw new InvalidPropertyError('Missing font size at ' + formatPosition(values[0][2][0]) + '. Ignoring.');
@@ -10012,7 +10010,7 @@ function font(property, configuration, validator) {
   }
 
   // ... and perhaps line-height
-  if (isSizeSet && values[index] && values[index][1] == Marker.FORWARD_SLASH && values[index + 1] && (validator.isLineHeightKeyword(values[index + 1][1]) || validator.isUnit(values[index + 1][1]) || validator.isNumber(values[index + 1][1]))) {
+  if (values[index] && values[index][1] == Marker.FORWARD_SLASH && values[index + 1] && (validator.isLineHeightKeyword(values[index + 1][1]) || validator.isUnit(values[index + 1][1]) || validator.isNumber(values[index + 1][1]))) {
     height.value = [values[index + 1]];
     index++;
     index++;
@@ -10720,7 +10718,7 @@ function background(property, configuration, lastInMultiplex) {
   return restored;
 }
 
-function borderRadius(property, configuration) {
+function borderRadius(property) {
   if (property.multiplex) {
     var horizontal = shallowClone(property);
     var vertical = shallowClone(property);
@@ -10740,8 +10738,8 @@ function borderRadius(property, configuration) {
       vertical.components.push(verticalComponent);
     }
 
-    var horizontalValues = fourValues(horizontal, configuration);
-    var verticalValues = fourValues(vertical, configuration);
+    var horizontalValues = fourValues(horizontal);
+    var verticalValues = fourValues(vertical);
 
     if (horizontalValues.length == verticalValues.length &&
         horizontalValues[0][1] == verticalValues[0][1] &&
@@ -10753,7 +10751,7 @@ function borderRadius(property, configuration) {
       return horizontalValues.concat([[Token.PROPERTY_VALUE, Marker.FORWARD_SLASH]]).concat(verticalValues);
     }
   } else {
-    return fourValues(property, configuration);
+    return fourValues(property);
   }
 }
 
@@ -11192,7 +11190,7 @@ function buildPrecisionOptions(roundingPrecision) {
 
   if (optimizable.length > 0) {
     precisionOptions.enabled = true;
-    precisionOptions.decimalPointMatcher = new RegExp('(\\d)\\.($|' + optimizable.join('|') + ')($|\W)', 'g');
+    precisionOptions.decimalPointMatcher = new RegExp('(\\d)\\.($|' + optimizable.join('|') + ')($|\\W)', 'g');
     precisionOptions.zeroMatcher = new RegExp('(\\d*)(\\.\\d+)(' + optimizable.join('|') + ')', 'g');
   }
 
@@ -14101,7 +14099,7 @@ function overrideShorthand(property, by) {
   by.unused = true;
 
   for (var i = 0, l = property.components.length; i < l; i++) {
-    override(property.components[i], by.components[i], property.multiplex);
+    override(property.components[i], by.components[i]);
   }
 }
 
@@ -14495,7 +14493,7 @@ function overrideProperties(properties, withMerging, compatibility, validator) {
             overridingComponent = right.components[k];
             mayOverride = configuration[overridingComponent.name].canOverride || sameValue;
 
-            overridable = overridable && everyValuesPair(mayOverride.bind(null, validator), overriddenComponent, overridingComponent);
+            overridable = everyValuesPair(mayOverride.bind(null, validator), overriddenComponent, overridingComponent);
           }
         } else {
           mayOverride = configuration[right.name].canOverride || sameValue;
@@ -15574,7 +15572,7 @@ function restructure(tokens, context) {
 
         if (movedToBeDropped.indexOf(k) == -1 && (!canReorderSingle(property, movedProperty, specificityCache) && !boundToAnotherPropertyInCurrrentToken(property, movedProperty, token) ||
             movableTokens[movedProperty[4]] && movableTokens[movedProperty[4]].length === mergeLimit)) {
-          dropPropertiesAt(i + 1, movedProperty, token);
+          dropPropertiesAt(i + 1, movedProperty);
 
           if (movedToBeDropped.indexOf(k) == -1) {
             movedToBeDropped.push(k);
@@ -16826,12 +16824,14 @@ function compatibilityFrom(source) {
 
 function merge(source, target) {
   for (var key in source) {
-    var value = source[key];
+    if (Object.prototype.hasOwnProperty.call(source, key)) {
+      var value = source[key];
 
-    if (typeof value === 'object' && !Array.isArray(value)) {
-      target[key] = merge(value, target[key] || {});
-    } else {
-      target[key] = key in target ? target[key] : value;
+      if (Object.prototype.hasOwnProperty.call(target, key) && typeof value === 'object' && !Array.isArray(value)) {
+        target[key] = merge(value, target[key] || {});
+      } else {
+        target[key] = key in target ? target[key] : value;
+      }
     }
   }
 
@@ -18153,7 +18153,7 @@ function loadRemoteResource(uri, inlineRequest, inlineTimeout, callback) {
 module.exports = loadRemoteResource;
 
 },{"../utils/is-http-resource":118,"../utils/is-https-resource":119,"../utils/override":123,"http":170,"https":131,"url":190}],103:[function(require,module,exports){
-var DATA_URI_PATTERN = /^data:(\S*?)?(;charset=[^;]+)?(;[^,]+?)?,(.+)/;
+var DATA_URI_PATTERN = /^data:(\S*?)?(;charset=(?:(?!;charset=)[^;])+)?(;[^,]+?)?,(.+)/;
 
 function matchDataUri(uri) {
   return DATA_URI_PATTERN.exec(uri);
@@ -18933,6 +18933,8 @@ function intoTokens(source, externalContext, internalContext, isNested) {
   var isEscaped;
   var wasEscaped = false;
   var characterWithNoSpecialMeaning;
+  var isPreviousDash = false;
+  var isVariable = false;
   var isRaw = false;
   var seekingValue = false;
   var seekingPropertyBlockClosing = false;
@@ -18951,6 +18953,8 @@ function intoTokens(source, externalContext, internalContext, isNested) {
     isCommentEndMarker = !wasCommentStart && !isQuoted && character == Marker.FORWARD_SLASH && source[position.index - 1] == Marker.ASTERISK;
     isCommentEnd = level == Level.COMMENT && isCommentEndMarker;
     characterWithNoSpecialMeaning = !isSpace && !isCarriageReturn && (character >= 'A' && character <= 'Z' || character >= 'a' && character <= 'z' || character >= '0' && character <= '9' || character == '-');
+    isVariable = isVariable || (!seekingValue && isPreviousDash && character === '-');
+    isPreviousDash = character === '-';
     roundBracketLevel = Math.max(roundBracketLevel, 0);
 
     metadata = isBufferEmpty ?
@@ -19059,7 +19063,7 @@ function intoTokens(source, externalContext, internalContext, isNested) {
       level = levels.pop();
       buffer.push(character);
       isBufferEmpty = false;
-    } else if (!isCommentStart && !isCommentEnd && character != Marker.CLOSE_ROUND_BRACKET && character != Marker.OPEN_ROUND_BRACKET && level != Level.COMMENT && !isQuoted && roundBracketLevel > 0) {
+    } else if (character != Marker.CLOSE_ROUND_BRACKET && character != Marker.OPEN_ROUND_BRACKET && level != Level.COMMENT && !isQuoted && roundBracketLevel > 0) {
       // character inside any function, e.g. hsla(.<--
       buffer.push(character);
       isBufferEmpty = false;
@@ -19191,6 +19195,12 @@ function intoTokens(source, externalContext, internalContext, isNested) {
       seekingValue = false;
       buffer = [];
       isBufferEmpty = true;
+    } else if (character == Marker.SEMICOLON && level == Level.RULE && propertyToken && isBufferEmpty && isVariable && !propertyToken[2]) {
+      // semicolon after empty variable value at rule level, e.g. a{--color: ;<--
+      propertyToken.push([Token.PROPERTY_VALUE, ' ', [originalMetadata(metadata, ' ', externalContext)]]);
+      isVariable = false;
+      propertyToken = null;
+      seekingValue = false;
     } else if (character == Marker.SEMICOLON && level == Level.RULE && propertyToken && isBufferEmpty) {
       // semicolon after bracketed value at rule level, e.g. a{color:rgb(...);<--
       propertyToken = null;
@@ -19278,6 +19288,16 @@ function intoTokens(source, externalContext, internalContext, isNested) {
       seekingPropertyBlockClosing = true;
       buffer = [];
       isBufferEmpty = true;
+    } else if (character == Marker.CLOSE_CURLY_BRACKET && level == Level.RULE && isVariable && propertyToken && !propertyToken[2]) {
+      // close brace after an empty variable declaration inside a rule, e.g. a{--color: }<--
+      propertyToken.push([Token.PROPERTY_VALUE, ' ', [originalMetadata(metadata, ' ', externalContext)]]);
+      isVariable = false;
+      propertyToken = null;
+      ruleToken = null;
+      newTokens = allTokens;
+
+      level = levels.pop();
+      seekingValue = false;
     } else if (character == Marker.CLOSE_CURLY_BRACKET && level == Level.RULE) {
       // close brace after a rule, e.g. a{color:red;}<--
       propertyToken = null;
@@ -19494,7 +19514,7 @@ function hasProtocol(uri) {
 module.exports = hasProtocol;
 
 },{}],117:[function(require,module,exports){
-var DATA_URI_PATTERN = /^data:(\S*?)?(;charset=[^;]+)?(;[^,]+?)?,(.+)/;
+var DATA_URI_PATTERN = /^data:(\S*?)?(;charset=(?:(?!;charset=)[^;])+)?(;[^,]+?)?,(.+)/;
 
 function isDataUriResource(uri) {
   return DATA_URI_PATTERN.test(uri);

@@ -6,6 +6,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    qunit_ver: require('qunit').version,
     browserify: {
       src: {
         options: {
