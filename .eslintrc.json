@@ -143,8 +143,5 @@
       "inside"
     ],
     "yoda": "error"
-  },
-  "plugins": [
-      "qunit"
-  ]
+  }
 }
