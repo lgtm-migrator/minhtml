@@ -62,7 +62,7 @@
     "terser": "^5.10.0"
   },
   "devDependencies": {
-    "clean-publish": "^3.4.2",
+    "clean-publish": "^3.4.3",
     "eslint": "^8.1.0",
     "grunt": "1.4.1",
     "grunt-browserify": "^6.0.0",
