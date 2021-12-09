@@ -142,11 +142,3 @@ var result = await minify('<p title="blah" id="moo">foo</p>', {
 });
 result; // '<p title=blah id=moo>foo</p>'
 ```
-
-## Running benchmarks
-
-Benchmarks for minified HTML:
-
-```Bash
-node benchmark.js
-```
