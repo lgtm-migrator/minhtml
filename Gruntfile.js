@@ -6,7 +6,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    qunit_ver: require('qunit').version,
     browserify: {
       src: {
         options: {
@@ -33,31 +32,11 @@ module.exports = function(grunt) {
       './index.html': [
         /(<h1>.*?<span>).*?(<\/span><\/h1>)/,
         '$1(v<%= pkg.version %>)$2'
-      ],
-      './tests/index.html': [
-        /("[^"]+\/qunit-)[0-9.]+?(\.(?:css|js)")/g,
-        '$1<%= qunit_ver %>$2'
       ]
     },
   });
 
   grunt.loadNpmTasks('grunt-browserify');
-  
-  function report(type, details) {
-    grunt.log.writeln(type + ' completed in ' + details.runtime + 'ms');
-    details.failures.forEach(function(details) {
-      grunt.log.error();
-      grunt.log.error(details.name + (details.message ? ' [' + details.message + ']' : ''));
-      grunt.log.error(details.source);
-      grunt.log.error('Actual:');
-      grunt.log.error(details.actual);
-      grunt.log.error('Expected:');
-      grunt.log.error(details.expected);
-    });
-    grunt.log[details.failed ? 'error' : 'ok'](details.passed + ' of ' + details.total + ' passed, ' + details.failed + ' failed');
-    return details.failed;
-  }
-
 
   grunt.registerMultiTask('replace', function() {
     var pattern = this.data[0];
@@ -72,11 +51,4 @@ module.exports = function(grunt) {
     'browserify'
   ]);
 
-  grunt.registerTask('test', function() {
-      grunt.task.run([
-        'dist',
-      ]);
-  });
-
-  grunt.registerTask('default', 'test');
 };
