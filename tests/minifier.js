@@ -2,7 +2,7 @@
 'use strict';
 
 if (typeof minify === 'undefined') {
-    global.minify = require('../src/htmlminifier.js').minify;
+    self.minify = require('../src/htmlminifier.js').minify;
 }
 
 QUnit.module('minifier');
