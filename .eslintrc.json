@@ -40,14 +40,14 @@
     ],
     "indent": [
       "warn",
-      2,
+      4,
       {
         "SwitchCase": 1,
         "VariableDeclarator": 2
       }
     ],
     "keyword-spacing": "error",
-    "linebreak-style": "error",
+    "linebreak-style": 0,
     "new-parens": "error",
     "no-array-constructor": "error",
     "no-caller": "error",
@@ -82,7 +82,7 @@
     "no-shadow-restricted-names": "error",
     "no-spaced-func": "error",
     "no-throw-literal": "error",
-    "no-trailing-spaces": "error",
+    "no-trailing-spaces": 0,
     "no-undef-init": "error",
     "no-undefined": "error",
     "no-unmodified-loop-condition": "error",

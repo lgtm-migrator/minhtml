@@ -6,9 +6,10 @@
     "minify": "terser dist/htmlminifier.js --compress --mangle --output dist/htmlminifier.min.js",
     "dist": "grunt dist && npm run minify",
     "test:lint": "eslint . --ext .js --cache",
-    "test:unit": "qunit ./tests/minifier.js",
+    "test:unit": "qunit ./tests/minifier.js && qunit ./tests/style.js && qunit ./tests/non-html5.js",
     "test": "npm run dist && npm run test:lint && npm run test:unit",
-    "publish": "npm run test && clean-publish"
+    "publish": "npm run test && clean-publish",
+    "fix": "eslint . --ext .js --cache --fix"
   },
   "keywords": [
     "cli",
