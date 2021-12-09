@@ -131,7 +131,7 @@ npm link .
 
 Note that almost all options are disabled by default. For command line usage, please see ``minhtml --help`` for a list of available options. Experiment and find what works best for you and your project.
 
-* **Sample command line:** ``minhtml --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true --minify-js true``
+* **Sample command:** ``minhtml --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true --minify-js true``
 
 ### Node.js
 
