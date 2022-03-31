@@ -61,12 +61,8 @@ QUnit.test('parsing non-trivial markup', async function(assert) {
     assert.equal(await minify(input), input);
 
     input = '<$unicorn>';
-    try {
-        await minify(input);
-    }
-    catch (err) {
-        assert.throws(err, 'Invalid tag name');
-    }
+    
+    assert.rejects(minify(input), 'Invalid tag name');
 
     assert.equal(await minify(input, {
         continueOnParseError: true,
