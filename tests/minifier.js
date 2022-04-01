@@ -61,12 +61,8 @@ QUnit.test('parsing non-trivial markup', async function(assert) {
     assert.equal(await minify(input), input);
 
     input = '<$unicorn>';
-    try {
-        await minify(input);
-    }
-    catch (err) {
-        assert.throws(err, 'Invalid tag name');
-    }
+    
+    assert.rejects(minify(input), 'Invalid tag name');
 
     assert.equal(await minify(input, {
         continueOnParseError: true,
@@ -102,12 +98,8 @@ QUnit.test('parsing non-trivial markup', async function(assert) {
     assert.equal(await minify(input), input);
 
     input = '<tag v-ref:vm_pv :imgs=" objpicsurl_ " ss"123>';
-    try {
-        await minify(input);
-    }
-    catch (err) {
-        assert.throws(err, 'invalid attribute name');
-    }
+    
+    assert.rejects(minify(input), 'invalid attribute name');
 
     assert.equal(await minify(input, {
         continueOnParseError: true,
@@ -131,12 +123,8 @@ QUnit.test('parsing non-trivial markup', async function(assert) {
           ' data-ng-model-options="{ debounce: 1000 }"' +
           ' data-ng-pattern="vm.options.format"' +
           ' data-options="vm.datepickerOptions">';
-    try {
-        await minify(input);
-    }
-    catch (err) {
-        assert.throws(err, 'HTML comment inside tag');
-    }
+    
+    assert.rejects(minify(input), 'HTML comment inside tag');
 
     assert.equal(await minify(input, {
         continueOnParseError: true,
@@ -144,12 +132,8 @@ QUnit.test('parsing non-trivial markup', async function(assert) {
 
     // https://github.com/kangax/html-minifier/issues/974
     input = '<!–– Failing New York Times Comment -->';
-    try {
-        await minify(input);
-    }
-    catch (err) {
-        assert.throws(err, 'invalid HTML comment');
-    }
+    
+    assert.rejects(minify(input), 'invalid HTML comment');
 
     assert.equal(await minify(input, {
         continueOnParseError: true,
