@@ -2610,7 +2610,7 @@ QUnit.test('decode entity characters', async function(assert) {
     output = '<div style="font:&quot">foo&dollar;</div>';
     assert.equal(await minify(input, { minifyCSS: true }), output);
     assert.equal(await minify(input, { decodeEntities: false, minifyCSS: true }), output);
-    output = '<div style="font:monospace">foo$</div>';
+    output = '<div style='font:"monospace"'>foo$</div>';
     assert.equal(await minify(input, { decodeEntities: true, minifyCSS: true }), output);
 
     input = '<a href="/?foo=1&amp;bar=&lt;2&gt;">baz&lt;moo&gt;&copy;</a>';
