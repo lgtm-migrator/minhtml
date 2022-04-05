@@ -1,8 +1,10 @@
+import HTMLMinifier from '../dist/htmlminifier.esm.bundle.js';
+
 (function() {
     'use strict';
 
     var minify = (function() {
-        var minify = require('minhtml').minify;
+        var minify = HTMLMinifier.minify;
         return async function(value, options, callback, errorback) {
             options.log = function(message) {
                 console.log(message);

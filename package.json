@@ -9,7 +9,8 @@
     "test:unit": "qunit ./tests/minifier.js && qunit ./tests/style.js && qunit ./tests/non-html5.js",
     "test": "npm run dist && npm run test:lint && npm run test:unit",
     "publish": "npm run test && clean-publish",
-    "fix": "eslint . --ext .js --cache --fix"
+    "fix": "eslint . --ext .js --cache --fix",
+    "build": "rollup -c && npm run minify"
   },
   "keywords": [
     "cli",
@@ -63,12 +64,18 @@
     "terser": "^5.10.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.3",
     "clean-publish": "^4.0.0",
     "eslint": "^8.7.0",
     "grunt": "1.4.1",
     "grunt-browserify": "^6.0.0",
     "node-qunit-puppeteer": "2.1.0",
-    "qunit": "^2.16.0"
+    "qunit": "^2.16.0",
+    "rollup": "^2.66.0",
+    "rollup-plugin-polyfill-node": "^0.8.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "vite": "^2.7.13"
   },
   "benchmarkDependencies": {
     "chalk": "^2.4.2",
