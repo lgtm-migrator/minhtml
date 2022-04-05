@@ -1,5 +1,4 @@
 dist/htmlminifier.js
 dist/htmlminifier.min.js
-Gruntfile.js
 rollup.config.js
 assets/
