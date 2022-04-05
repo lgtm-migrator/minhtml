@@ -1,13 +1,13 @@
 {
   "name": "minhtml",
   "description": "Highly configurable, well-tested JavaScript-based HTML minifier.",
-  "version": "0.7.1",
+  "version": "1.0.1",
   "scripts": {
     "minify": "terser dist/htmlminifier.js --compress --mangle --output dist/htmlminifier.min.js",
     "test:lint": "eslint . --ext .js --cache",
     "test:unit": "qunit ./tests/minifier.js && qunit ./tests/style.js && qunit ./tests/non-html5.js",
     "test": "npm run build && npm run test:lint && npm run test:unit",
-    "publish": "npm run test && clean-publish",
+    "publish": "clean-publish",
     "fix": "eslint . --ext .js --cache --fix",
     "build": "rollup -c && npm run minify"
   },

@@ -1,3 +1,10 @@
+## v1.0.0 - First stable release! 🥳
+* Updated dependencies
+* Dev: Migrated to ``rollup`` (from ``browserify``)
+* Dev: Finished removing Grunt
+
+NB: This had to be published as v1.0.1 due to an issue encountered when publishing to NPM.
+
 ## v0.6.0
 * Updated terser
 * Updated commander
