@@ -6,7 +6,7 @@ See [corresponding blog post by the original author](http://perfectionkills.com/
 
 ## Minification comparison
 
-How does minhtml compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/#q=html+minifier)) as well as [minimize](https://github.com/Swaagie/minimize)?
+How does minhtml compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/search?q=html+minifier)) as well as [minimize](https://github.com/Swaagie/minimize)?
 
 | Site                                                                         | Original size *(KB)* | minhtml | minimize | Will Peavy |
 | ---------------------------------------------------------------------------- |:--------------------:| ------------:| --------:| ----------:|
