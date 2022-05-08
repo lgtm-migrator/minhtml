@@ -60,7 +60,7 @@
     "he": "^1.2.0",
     "param-case": "^3.0.4",
     "relateurl": "^0.2.7",
-    "terser": "^5.13.0"
+    "terser": "^5.13.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.0",
