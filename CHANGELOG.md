@@ -1,3 +1,8 @@
+## v1.1.0
+* Updated dependencies
+* Dev: Added Node v18 to CI
+* Docs: Updated link to Google search in README
+
 ## v1.0.0 - First stable release! 🥳
 * Updated dependencies
 * Dev: Migrated to ``rollup`` (from ``browserify``)
