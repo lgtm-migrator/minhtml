@@ -1,3 +1,7 @@
+## v1.1.1
+* Updated dependencies
+* Reduced package size by removing an unnecessary dev dependency
+
 ## v1.1.0
 * Updated dependencies
 * Dev: Added Node v18 to CI
