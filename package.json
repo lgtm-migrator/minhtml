@@ -7,7 +7,6 @@
     "test:lint": "eslint . --ext .js --cache",
     "test:unit": "qunit ./tests/minifier.js && qunit ./tests/style.js && qunit ./tests/non-html5.js",
     "test": "npm run build && npm run test:lint && npm run test:unit",
-    "publish": "clean-publish",
     "fix": "eslint . --ext .js --cache --fix",
     "build": "rollup -c && npm run minify"
   },
