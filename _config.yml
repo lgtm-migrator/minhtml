@@ -6,7 +6,6 @@ exclude:
   - "backtest.js"
   - "benchmark.js"
   - "cli.js"
-  - "Gruntfile.js"
   - "package.json"
   - "package-lock.json"
   - "README.md"

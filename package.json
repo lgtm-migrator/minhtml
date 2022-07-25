@@ -1,12 +1,14 @@
 {
   "name": "minhtml",
   "description": "Highly configurable, well-tested JavaScript-based HTML minifier.",
-  "version": "0.4.0",
+  "version": "1.1.1",
   "scripts": {
     "minify": "terser dist/htmlminifier.js --compress --mangle --output dist/htmlminifier.min.js",
-    "dist": "grunt dist && npm run minify",
-    "lint": "eslint . --ext .js --cache",
-    "test": "npm run minify && npm run lint && grunt test"
+    "test:lint": "eslint . --ext .js --cache",
+    "test:unit": "qunit ./tests/minifier.js && qunit ./tests/style.js && qunit ./tests/non-html5.js",
+    "test": "npm run build && npm run test:lint && npm run test:unit",
+    "fix": "eslint . --ext .js --cache --fix",
+    "build": "rollup -c && npm run minify"
   },
   "keywords": [
     "cli",
@@ -25,7 +27,7 @@
     "uglifier",
     "uglify"
   ],
-  "homepage": "https://github.com/R4356th/minhtml",
+  "homepage": "https://minhtml.js.org",
   "author": "R4356th",
   "contributors": [
     "Gilmore Davidson (https://github.com/gilmoreorless)",
@@ -52,20 +54,22 @@
   },
   "dependencies": {
     "camel-case": "^4.1.2",
-    "clean-css": "^5.1.4",
-    "commander": "^4.1.1",
+    "clean-css": "^5.3.1",
+    "commander": "^7.2.0",
     "he": "^1.2.0",
     "param-case": "^3.0.4",
     "relateurl": "^0.2.7",
-    "terser": "^4.6.3"
+    "terser": "^5.14.2"
   },
   "devDependencies": {
-    "eslint": "^7.31.0",
-    "eslint-plugin-qunit": "^6.2.0",
-    "grunt": "1.4.1",
-    "grunt-browserify": "^6.0.0",
+    "@rollup/plugin-commonjs": "^22.0.1",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "eslint": "^8.20.0",
     "node-qunit-puppeteer": "2.1.0",
-    "qunit": "^2.16.0"
+    "qunit": "^2.19.1",
+    "rollup": "^2.77.0",
+    "rollup-plugin-polyfill-node": "^0.10.2",
+    "rollup-plugin-terser": "^7.0.2"
   },
   "benchmarkDependencies": {
     "chalk": "^2.4.2",

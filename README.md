@@ -1,30 +1,27 @@
 # minhtml - a Node.JS package for easily minifying HTML
-[![Continuous Integration](https://github.com/R4356th/minhtml/actions/workflows/ci.yml/badge.svg)](https://github.com/R4356th/minhtml/actions/workflows/ci.yml)
 
-[minhtml](https://r4356th.github.io/minhtml), short for "minify html" is a highly **configurable**, **well-tested**, **JavaScript-based** HTML minifier. It also supports Mustache templates.
+[minhtml](https://minhtml.js.org), short for "minify html" is a highly **configurable**, **well-tested**, **JavaScript-based** HTML minifier. It also supports Mustache/Handlebars templates and should also reasonably support Angular, React and Vue components.
 
 See [corresponding blog post by the original author](http://perfectionkills.com/experimenting-with-html-minifier/) for all the gory details of [how it works](http://perfectionkills.com/experimenting-with-html-minifier/#how_it_works), [description of each option](http://perfectionkills.com/experimenting-with-html-minifier/#options), [testing results](http://perfectionkills.com/experimenting-with-html-minifier/#field_testing) and [conclusions](http://perfectionkills.com/experimenting-with-html-minifier/#cost_and_benefits).
 
-[Test suite is available online](https://r4356th.github.io/minhtml/tests/).
-
 ## Minification comparison
 
-How does HTMLMinifier compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/#q=html+minifier)) as well as [htmlcompressor.com](http://htmlcompressor.com) and [minimize](https://github.com/Swaagie/minimize)?
+How does minhtml compare to other solutions — [HTML Minifier from Will Peavy](http://www.willpeavy.com/minifier/) (1st result in [Google search for "html minifier"](https://www.google.com/search?q=html+minifier)) as well as [minimize](https://github.com/Swaagie/minimize)?
 
-| Site                                                                         | Original size *(KB)* | HTMLMinifier | minimize | Will Peavy | htmlcompressor.com |
-| ---------------------------------------------------------------------------- |:--------------------:| ------------:| --------:| ----------:| ------------------:|
-| [Google](https://www.google.com/)                                            | 45                   | **41**       | 45       | 46         | 45                 |
-| [Stack Overflow](https://stackoverflow.com/)                                 | 115                  | **82**       | 90       | 92         | 88                 |
-| [HTMLMinifier](https://github.com/kangax/html-minifier)                      | 132                  | **105**      | 118      | 123        | 118                |
-| [Bootstrap CSS](https://getbootstrap.com/docs/3.3/css/)                      | 271                  | **260**      | 269      | 229        | 269                |
-| [Twitter](https://twitter.com/)                                              | 289                  | **238**      | 282      | 314        | 282                |
-| [BBC](https://www.bbc.co.uk/)                                                | 298                  | **233**      | 289      | 291        | 269                |
-| [Wikipedia](https://en.wikipedia.org/wiki/President_of_the_United_States)    | 574                  | **468**      | 557      | 578        | 557                |
-| [Amazon](https://www.amazon.co.uk/)                                          | 702                  | **343**      | 692      | 704        | n/a                |
-| [NBC](https://www.nbc.com/)                                                  | 844                  | **805**      | 843      | 844        | n/a                |
-| [Eloquent Javascript](https://eloquentjavascript.net/1st_edition/print.html) | 870                  | **815**      | 840      | 864        | n/a                |
-| [New York Times](https://www.nytimes.com/)                                   | 1304                 | **1183**     | 1301     | 1295       | n/a                |
-| [ES draft](https://tc39.github.io/ecma262/)                                  | 6347                 | **5686**     | 5863     | n/a        | n/a                |
+| Site                                                                         | Original size *(KB)* | minhtml | minimize | Will Peavy |
+| ---------------------------------------------------------------------------- |:--------------------:| ------------:| --------:| ----------:|
+| [Google](https://www.google.com/)                                            | 49                   | **44**       | 49       | 51         |
+| [Twitter](https://twitter.com/)                                              | 69                   | **61**       | 68       | 68         |
+| [Stack Overflow](https://stackoverflow.com/)                                 | 202                  | **164**      | 178      | 178        |
+| [minhtml](https://github.com/R4356th/minhtml)                           | 222                  | **136**      | 200      | 214        |
+| [Bootstrap CSS](https://getbootstrap.com/docs/3.3/css/)                      | 271                  | **260**      | 269      | 229        |
+| [BBC](https://www.bbc.co.uk/)                                                | 333                  | **307**      | 331      | 332        |
+| [Amazon](https://www.amazon.co.uk/)                                          | 459                  | **410**      | 449      | 461        |
+| [Wikipedia](https://en.wikipedia.org/wiki/President_of_the_United_States)    | 692                  | **558**      | 671      | 697        |
+| [New York Times](https://www.nytimes.com/)                                   | 770                  | **688**      | 766      | 755        |
+| [Eloquent Javascript](https://eloquentjavascript.net/1st_edition/print.html) | 870                  | **815**      | 840      | 864        |
+| [NBC](https://www.nbc.com/)                                                  | 1857                 | **1712**     | 1844     | 1864       |
+| [ES draft](https://tc39.github.io/ecma262/)                                  | 5912                 | **5194**     | 5384     | n/a        |
 
 ## Options Quick Reference
 
@@ -87,7 +84,7 @@ SVG tags are automatically recognized, and when they are minified, both case-sen
 
 ### Working with invalid markup
 
-HTMLMinifier **can't work with invalid or partial chunks of markup**. This is because it parses markup into a tree structure, then modifies it (removing anything that was specified for removal, ignoring anything that was specified to be ignored, etc.), then it creates a markup out of that tree and returns it.
+minhtml **can't work with invalid or partial chunks of markup**. This is because it parses markup into a tree structure, then modifies it (removing anything that was specified for removal, ignoring anything that was specified to be ignored, etc.), then it creates a markup out of that tree and returns it.
 
 Input markup (e.g. `<p id="">foo`)
 
@@ -103,11 +100,11 @@ Transformation of internal representation (e.g. removal of `id` attribute)
 
 Output of resulting markup (e.g. `<p>foo</p>`)
 
-HTMLMinifier can't know that original markup was only half of the tree; it does its best to try to parse it as a full tree and it loses information about tree being malformed or partial in the beginning. As a result, it can't create a partial/malformed tree at the time of the output.
+minhtml can't know that original markup was only half of the tree; it does its best to try to parse it as a full tree and it loses information about tree being malformed or partial in the beginning. As a result, it can't create a partial/malformed tree at the time of the output.
 
 ## Installation Instructions
 
-From NPM for use as a command line app:
+From NPM for use as a (global) command line app:
 
 ```shell
 npm install minhtml -g
@@ -131,22 +128,14 @@ npm link .
 
 Note that almost all options are disabled by default. For command line usage, please see ``minhtml --help`` for a list of available options. Experiment and find what works best for you and your project.
 
-* **Sample command line:** ``minhtml --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true --minify-js true``
+* **Sample command:** ``minhtml --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --use-short-doctype --minify-css true --minify-js true``
 
 ### Node.js
 
 ```js
 var minify = require('minhtml').minify;
-var result = minify('<p title="blah" id="moo">foo</p>', {
+var result = await minify('<p title="blah" id="moo">foo</p>', {
   removeAttributeQuotes: true
 });
 result; // '<p title=blah id=moo>foo</p>'
-```
-
-## Running benchmarks
-
-Benchmarks for minified HTML:
-
-```Bash
-node benchmark.js
 ```
