@@ -20,4 +20,4 @@ jobs:
       - name: Run tests
         run: npm run test
       - name: Test CLI
-        run: minhtml --collapse-whitespace --remove-comments --minify-js --input-dir ./examples --output-dir ./examples/minified
+        run: node cli.js --collapse-whitespace --remove-comments --minify-js --input-dir ./examples --output-dir ./examples/minified
