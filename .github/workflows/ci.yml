@@ -19,4 +19,9 @@ jobs:
         run: npm install --no-optional --no-save --no-update-notifier
       - name: Run tests
         run: npm run test
-        
+      - name: Test CLI
+        run: node cli.js --collapse-whitespace --remove-comments --minify-js --minify-css --remove-attribute-quotes --input-dir ./examples --output-dir ./examples/minified
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: reflect automatic changes"
