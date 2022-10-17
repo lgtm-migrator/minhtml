@@ -62,7 +62,7 @@
     "terser": "^5.14.2"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-commonjs": "^23.0.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "eslint": "^8.25.0",
     "node-qunit-puppeteer": "2.1.0",
