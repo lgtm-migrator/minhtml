@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^23.0.0",
-    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.1",
     "eslint": "^8.25.0",
     "node-qunit-puppeteer": "2.1.0",
     "qunit": "^2.19.2",
